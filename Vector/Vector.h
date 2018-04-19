@@ -45,7 +45,7 @@ public:
 	{
 		for (int i = 0;i < cur_size;i++)
 		{
-			cout <<right<< setw(5)<<els[i];
+			cout <<left<< setw(5)<<els[i];
 		}
 	}
 
@@ -75,13 +75,19 @@ public:
 				temp[i] = els[i];
 			delete[]els;
 			els = temp;
+			cur_size++;
+			for (int i = cur_size; i >p - 1; i--)
+				els[i + 1] = els[i];
+			els[p - 1] = e;
+			if (p+1 == cur_size)els[p] = 0;
 		}
 		else
 		{
 			cur_size++;
 			for (int i = cur_size;i >p-1;i--)
 				els[i + 1] = els[i];			
-			els[p-1] = e;			
+			els[p-1] = e;	
+			if (p == cur_size)els[p + 1] = 0;
 		}
 	}
 
@@ -89,6 +95,11 @@ public:
 	{
 		if (cur_size > 0)
 			cur_size--;
+	}
+
+	void rep_pos(const int&p, const int&e)
+	{
+		els[p-1] = e;
 	}
 
 	int& at(int pos)
